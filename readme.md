@@ -53,6 +53,17 @@ This project involves setting up AWS services including S3, EC2, and Lambda, and
   - Multiplication
   - Division
 - Successfully tested the function with sample input.
+## AWS Project Screenshots
+
+### S3 Bucket
+![S3 Bucket](AWS/s3_bucket.png)
+
+### EC2 Instance
+![EC2 Instance](AWS/ec2_instance.png)
+
+### Lambda Function
+![Lambda Function](AWS/lambda_function.png)
+
 
 ## Notes
 - All services were created and tested in the AWS Free Tier environment.
