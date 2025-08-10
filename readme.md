@@ -1,12 +1,13 @@
 # Generative AI Assignments
 
-This repository contains my Generative AI assignments completed during training.  
+This repository contains my Generative AI assignments completed during training.
 
 # To-Do List
 
+[Folder Link: TODO](./TODO/)
+
 ## Original Requirement
 Build a simple to-do list application.
-
 ## My Implementation
 I created a **Streamlit-based To-Do List app** that allows users to:
 - Add new tasks.
@@ -26,8 +27,11 @@ The tasks are stored in a `tasks.json` file so that they persist between session
 
 <img width="1920" height="953" alt="todo ss" src="https://github.com/user-attachments/assets/9b9f8207-eb35-4343-94cc-f6ca72dc1946" />
 
+---
 
 # AWS Setup and Calculator Lambda
+
+[Folder Link: AWS](./AWS/)
 
 ## Overview
 This project involves setting up AWS services including S3, EC2, and Lambda, and deploying a Python-based calculator function.
@@ -55,6 +59,7 @@ This project involves setting up AWS services including S3, EC2, and Lambda, and
   - Multiplication
   - Division
 - Successfully tested the function with sample input.
+
 ## AWS Project Screenshots
 
 ### S3 Bucket
@@ -66,15 +71,14 @@ This project involves setting up AWS services including S3, EC2, and Lambda, and
 ### Lambda Function
 ![Lambda Function](AWS/lambda_function.png)
 
-
 ## Notes
 - All services were created and tested in the AWS Free Tier environment.
 - The Lambda function can be extended to handle more operations as needed.
 
-
+---
 
 ## Assignments of Session 3 and 4
-1. [Task 1 – Rainbow Explanation (Groq AI)](#task-1--rainbow-explanation-groq-ai)
+1. [Task 1 – Rainbow Explanation (Groq AI)](#task-1--rainbow-explanation-groq-ai) 
 2. [Task 2 – Poem Generator](#task-2--poem-generator)
 3. [Task 3 – RetrievalQA: Company Policy Q&A System](#task-3--retrievalqa-company-policy-qa-system)
 4. [Task 4 – Document Loader & Chunk Counter](#task-4--document-loader--chunk-counter)
@@ -82,6 +86,8 @@ This project involves setting up AWS services including S3, EC2, and Lambda, and
 ---
 
 ## Task 1 – Rainbow Explanation (Groq AI)
+
+[Folder Link: Rainbows](./Rainbows/)
 
 ### Original Requirement  
 Write a Python script to send the prompt **"Explain how rainbows are formed"** using OpenAI’s GPT-3.5 Turbo or Hugging Face Transformers, and print the response.
@@ -99,10 +105,11 @@ The script:
 - Styled chat messages with user/AI avatars and preserved chat history in the session.
 - <img width="1920" height="1687" alt="rainbow ss" src="https://github.com/user-attachments/assets/d00d2fba-0b12-486e-9b76-8075eb730c82" />
 
-
 ---
 
 ## Task 2 – Poem Generator
+
+[Folder Link: poem](./poem/)
 
 ### Original Requirement  
 Use the Transformers library from Hugging Face to load a model and generate text from the prompt:  
@@ -119,11 +126,14 @@ The app:
 - Designed a **polished, gradient-based Streamlit UI** with equal-height content cards.  
 - Allowed any topic (not just “ocean”), making it reusable for more prompts.  
 - Displayed the poem and artwork side-by-side for a complete creative output.
+
 <img width="1920" height="1421" alt="poem ss" src="https://github.com/user-attachments/assets/bc806054-1099-450c-9020-e6ed79689b39" />
 
 ---
 
 ## Task 3 – RetrievalQA: Company Policy Q&A System
+
+[Folder Link: rag_ui](./rag_ui/)
 
 ### Original Requirement  
 Using RetrievalQA, create a pipeline that can answer the question:  
@@ -144,12 +154,15 @@ I built a RetrievalQA system that:
 - Added answer style toggle (Concise/Detailed).  
 - Displayed sources with page numbers and file names.  
 - Included a **sidebar history** with quick re-run and download options for cited documents.
+
 <img width="1920" height="826" alt="rag1" src="https://github.com/user-attachments/assets/53cb279b-cefc-4a41-a749-faa7343213cd" />
 <img width="1920" height="1585" alt="rag2" src="https://github.com/user-attachments/assets/c1ad206b-7fe2-4038-b820-7d3d0218ba62" />
 
 ---
 
 ## Task 4 – Document Loader & Chunk Counter
+
+[Folder Link: chunks](./chunks/)
 
 ### Original Requirement  
 Load a `.txt` or `.pdf` file using LangChain’s `TextLoader` and split it using `RecursiveCharacterTextSplitter`. Print the total number of document chunks created.
@@ -166,5 +179,5 @@ I wrote a Python script that:
 - Supported **multiple files** at once instead of a single file.  
 - Automatically finds all `.pdf` and `.txt` files in the `data` folder.  
 - Made chunk size and overlap easily configurable in the code.
-  <img width="1880" height="712" alt="chunks" src="https://github.com/user-attachments/assets/6d26a578-7677-468b-a4da-24a72b8c85f0" />
 
+<img width="1880" height="712" alt="chunks" src="https://github.com/user-attachments/assets/6d26a578-7677-468b-a4da-24a72b8c85f0" />
