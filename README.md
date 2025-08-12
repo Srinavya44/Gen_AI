@@ -181,3 +181,32 @@ I wrote a Python script that:
 - Made chunk size and overlap easily configurable in the code.
 
 <img width="1880" height="712" alt="chunks" src="https://github.com/user-attachments/assets/6d26a578-7677-468b-a4da-24a72b8c85f0" />
+
+---
+## 🍳 AI Recipe Generator(AWS Bedrock + Streamlit)
+
+[Folder Link: AI Recipe Generator](./AWSBedrock/)
+
+### Overview
+An interactive **Streamlit web app** that uses **AWS Bedrock** with LLaMA 3 to generate creative and dietary-compliant recipes based on the ingredients you have.  
+
+This app automatically filters or replaces ingredients to match dietary restrictions such as vegan, vegetarian, pescatarian, and gluten-free. You just list your ingredients, choose preferences, and let AI cook up something delicious.
+
+---
+
+##  Features
+
+- **Dietary Restrictions Support**
+  - Vegan, Vegetarian, Pescatarian, Gluten-Free, or No restriction
+  - Automatic ingredient replacement or removal
+-  **Customizable Recipe Output**
+   - Choose number of recipes (1–5)
+   - Select difficulty (Any, Easy, Medium, Hard)
+   - Set servings count
+-  **AI-Powered**
+   - Uses AWS Bedrock with `meta.llama3-8b-instruct-v1:0` for recipe generation
+-  **Beautiful UI**
+   - Styled recipe cards with sections for ingredients, steps, and notes
+
+<img width="1920" height="2291" alt="AI Recipe Generator" src="https://github.com/user-attachments/assets/aa6f1746-3151-4ade-b8ce-254d4f44967a" />
+
