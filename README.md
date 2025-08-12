@@ -187,6 +187,7 @@ I wrote a Python script that:
 
 [Folder Link: AI Recipe Generator](./AWSBedrock/)
 
+### Overview
 An interactive **Streamlit web app** that uses **AWS Bedrock** with LLaMA 3 to generate creative and dietary-compliant recipes based on the ingredients you have.  
 
 This app automatically filters or replaces ingredients to match dietary restrictions such as vegan, vegetarian, pescatarian, and gluten-free. You just list your ingredients, choose preferences, and let AI cook up something delicious.
