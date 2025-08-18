@@ -3,8 +3,8 @@
 This repository contains my Generative AI assignments completed during training.
 
 ## 📂 Quick Links  
-- [Week 1](#week-1)  
-- [Week 2](#week-2)
+- [Week 1](#-week-1)
+- [Week 2](#-week-2)
 
  ## 📂 Week 1  
 
