@@ -244,7 +244,7 @@ Understand the difference between zero-shot and few-shot prompting in LLMs.
 - [`app.py`](./Week2/session1/assignment1/app.py) — Streamlit app to generate & compare outputs.  
 - [Report (DOCX)](./Week2/session1/assignment1/Zero%20shot%20vs%20few%20shot.docx) — Includes prompts, outputs, and observations.  
 - Screenshot of test runs.  
-![zero shot vs few shot](./Week2/session1/assignment1/zero shot vs few shot.png)
+![alt text](<Week2/session1/assignment1/zero shot vs few shot.png>)
 
 ---
 
