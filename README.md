@@ -2,9 +2,17 @@
 
 This repository contains my Generative AI assignments completed during training.
 
+## 📂 Quick Links  
+- [Week 1](#week-1)  
+- [Week 2](#week-2)
+
+ ## 📂 Week 1  
+
+This week focused on **introductory AI projects** like a To-Do List app, AWS setup, and simple Groq-based tasks (rainbow explanation, poem generator, RetrievalQA, chunking).  
+
 # To-Do List
 
-[Folder Link: TODO](./TODO/)
+[Folder Link: TODO](./Week1/TODO/)
 
 ## Original Requirement
 Build a simple to-do list application.
@@ -31,7 +39,7 @@ The tasks are stored in a `tasks.json` file so that they persist between session
 
 # AWS Setup and Calculator Lambda
 
-[Folder Link: AWS](./AWS/)
+[Folder Link: AWS](./Week1/AWS/)
 
 ## Overview
 This project involves setting up AWS services including S3, EC2, and Lambda, and deploying a Python-based calculator function.
@@ -87,7 +95,7 @@ This project involves setting up AWS services including S3, EC2, and Lambda, and
 
 ## Task 1 – Rainbow Explanation (Groq AI)
 
-[Folder Link: Rainbows](./Rainbows/)
+[Folder Link: Rainbows](./Week1/Rainbows/)
 
 ### Original Requirement  
 Write a Python script to send the prompt **"Explain how rainbows are formed"** using OpenAI’s GPT-3.5 Turbo or Hugging Face Transformers, and print the response.
@@ -109,7 +117,7 @@ The script:
 
 ## Task 2 – Poem Generator
 
-[Folder Link: poem](./poem/)
+[Folder Link: poem](./Week1/poem/)
 
 ### Original Requirement  
 Use the Transformers library from Hugging Face to load a model and generate text from the prompt:  
@@ -133,7 +141,7 @@ The app:
 
 ## Task 3 – RetrievalQA: Company Policy Q&A System
 
-[Folder Link: rag_ui](./rag_ui/)
+[Folder Link: rag_ui](./Week1/rag_ui/)
 
 ### Original Requirement  
 Using RetrievalQA, create a pipeline that can answer the question:  
@@ -162,7 +170,7 @@ I built a RetrievalQA system that:
 
 ## Task 4 – Document Loader & Chunk Counter
 
-[Folder Link: chunks](./chunks/)
+[Folder Link: chunks](./Week1/chunks/)
 
 ### Original Requirement  
 Load a `.txt` or `.pdf` file using LangChain’s `TextLoader` and split it using `RecursiveCharacterTextSplitter`. Print the total number of document chunks created.
@@ -185,7 +193,7 @@ I wrote a Python script that:
 ---
 ## 🍳 AI Recipe Generator(AWS Bedrock + Streamlit)
 
-[Folder Link: AI Recipe Generator](./AWSBedrock/)
+[Folder Link: AI Recipe Generator](./Week1/AWSBedrock/)
 
 ### Overview
 An interactive **Streamlit web app** that uses **AWS Bedrock** with LLaMA 3 to generate creative and dietary-compliant recipes based on the ingredients you have.  
@@ -210,3 +218,108 @@ This app automatically filters or replaces ingredients to match dietary restrict
 
 <img width="1920" height="2291" alt="AI Recipe Generator" src="https://github.com/user-attachments/assets/aa6f1746-3151-4ade-b8ce-254d4f44967a" />
 
+
+## 📂 Week 2  
+
+This week focused on **Prompt Engineering** (Session 1) and **Exploring Open Source LLMs with Local Setup** (Session 2).  
+
+---
+
+## Session 1: Prompt Engineering  
+
+### 📝 Assignment 1: Zero-shot vs Few-shot Prompting  
+
+[Folder Link: Assignment 1](./Week2/session1/assignment1/) 
+
+**Objective**  
+Understand the difference between zero-shot and few-shot prompting in LLMs.  
+
+**Description**  
+- **Zero-shot prompting:** Instruction given without examples.  
+- **Few-shot prompting:** Instruction preceded by 2–3 examples to guide the model’s style.  
+- Tested on multiple creative tasks (movie pitch generation).  
+- Compared outputs for accuracy, style, and consistency.  
+
+**Deliverables**  
+- [`app.py`](./Week2/session1/assignment1/app.py) — Streamlit app to generate & compare outputs.  
+- [Report (DOCX)](./Week2/session1/assignment1/Zero%20shot%20vs%20few%20shot.docx) — Includes prompts, outputs, and observations.  
+- Screenshots of test runs.  
+![alt text](<zero shot vs few shot.png>)
+
+---
+
+### 📝 Assignment 2: Role-based & Chain-of-Thought Prompting  
+
+[Folder Link: Assignment 2](./Week2/session1/assignment2/)  
+
+**Objective**  
+Learn how role-based and chain-of-thought prompting improve the quality of LLM responses.  
+
+**Description**  
+- **Role-based prompting:** Assigned roles (e.g., *Tour Guide*, *Luxury Agent*, *Foodie*) to adapt response style.  
+- **Chain-of-Thought prompting:** Instructed the model to think step by step, producing more structured reasoning.  
+- Compared outputs across creative and reasoning-based tasks (e.g., travel itineraries).  
+
+**Deliverables**  
+- [`app.py`](./Week2/session1/assignment2/app.py) — Streamlit app to generate & compare outputs.  
+- [Report (DOCX)](./Week2/session1/assignment2/role%20vs%20cot.docx) —  Includes prompts, outputs, and observations.  
+- [Screenshots of outputs(pdf)](./Week2/session1/assignment2/role%20vs%20cot%20outputs.pdf) -for each prompt type.  
+
+---
+
+## Session 2: Open Source LLMs & Local Setup  
+
+### 📝 Assignment 1: Hugging Face Model Exploration  
+**Project:** Fake News Detector 
+
+[Folder Link: Assignment 1](./Week2/session2/assignment1/)  
+
+**Objective**  
+Explore an open-source model from Hugging Face Hub and use it to perform a simple NLP task.  
+
+**Description**  
+- Set up a Python virtual environment and installed `transformers` and `torch`.  
+- Selected the model **Pulk17/Fake-News-Detection** from Hugging Face Hub.  
+- Built a **Streamlit web app** that classifies input news headlines or short articles as **Fake** or **Real**.  
+- Added extra features like confidence scoring, low-confidence warnings, and a history of recent checks.  
+
+**Features**  
+- Input box or sample text options.  
+- Prediction displayed as **Real** or **Fake** news.  
+- Confidence percentage with a progress bar.  
+- Warning for low-confidence predictions (< 60%).  
+- Sidebar with history of last 5 checks.  
+
+**Deliverables**  
+- [`app.py`](./Week2/session2/assignment1/app.py) — Streamlit Fake News Detector app.  
+- Screenshot(s) of working application. 
+![alt text](fakenewsdetector.png) 
+
+**How to Run**  
+```bash
+# 1. Create virtual environment
+python -m venv venv
+source venv/bin/activate   # On Windows: venv\Scripts\activate
+
+# 2. Install dependencies
+pip install -r requirements.txt
+
+# 3. Run the Streamlit app
+streamlit run app.py
+```
+---
+### Assignment 2: Local LLM Installation and Testing
+
+[Folder Link: Assignment 2](./Week2/session2/assignment2/)  
+
+### Objective  
+Install a local Large Language Model (LLM) using Ollama, run a simple test prompt, measure response time, and document troubleshooting steps.  
+
+### Deliverables  
+- Screenshot of working LLM  
+- [Local LLM Report (DOCX)](./Week2/session2/assignment2/Local-LLM.docx) — contains:  
+  - Installation steps  
+  - Sample prompt and output  
+  - Response time measurement  
+  - Troubleshooting notes  
+  - Reflection on performance and installation experience  

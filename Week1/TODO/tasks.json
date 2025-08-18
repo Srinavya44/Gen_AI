@@ -1,0 +1,17 @@
+[
+    {
+        "task": "complete gen ai tasks",
+        "done": true,
+        "priority": "High"
+    },
+    {
+        "task": "explore amazon bedrock",
+        "done": false,
+        "priority": "Medium"
+    },
+    {
+        "task": "complete novel",
+        "done": true,
+        "priority": "Low"
+    }
+]
