@@ -323,3 +323,31 @@ Install a local Large Language Model (LLM) using Ollama, run a simple test promp
   - Response time measurement  
   - Troubleshooting notes  
   - Reflection on performance and installation experience  
+  ---
+## Session 3
+
+### Task  
+Build Python scripts for text generation and chat, error handling, streaming responses, and best practices.
+
+[Folder Link: session 3](./Week2/session3/) 
+
+### Overview  
+An interactive multi-chat interface built with **Streamlit** and **Groq API**. This app allows users to create, manage, and chat across multiple conversations with streaming responses in a clean iMessage-like UI.
+
+---
+
+### 📌 Features
+- **Text Generation & Chat**: Integrated Groq API for real-time AI chat.  
+- **Error Handling**: Graceful error messages for API and network issues.  
+- **Streaming Responses**: Tokens stream into the UI for a smooth experience.  
+- **Multi-Chat Management**: Create, delete, and switch between multiple chats.  
+- **Persistent History**: Conversations are saved in `chat_history.json`, restored on reload, and can be reopened.  
+- **Customizable Settings**: Pick from multiple available Groq models, adjust creativity (temperature), and set max tokens.  
+- **Polished UI**: Modern iMessage-like chat bubbles with avatars.  
+
+---
+
+### Screenshots
+![chat 1](./Week2/session3/chat%201.png)  
+---  
+![chat 2](./Week2/session3/chat%202.png)  
