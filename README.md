@@ -293,7 +293,8 @@ Explore an open-source model from Hugging Face Hub and use it to perform a simpl
 **Deliverables**  
 - [`app.py`](./Week2/session2/assignment1/app.py) — Streamlit Fake News Detector app.  
 - Screenshot(s) of working application. 
-![fakenewsdetector](./Week2/session2/assignment1/fakenewsdetector.png) 
+![fakenewsdetector](./Week2/session2/assignment1/fakenewsdetector.png)
+
 
 **How to Run**  
 ```bash
