@@ -18,116 +18,116 @@ bedrock = boto3.client("bedrock-runtime", region_name=REGION)
 # -----------------------
 # Dietary rules & replacements
 # -----------------------
-# dietary_rules = {
-#     "none": {
-#         "blocked": [],
-#         "replacement": {}
-#     },
-#     "vegan": {
-#         "blocked": ["chicken", "fish", "beef", "pork", "egg", "milk", "cheese", "yogurt", "butter", "honey"],
-#         "replacement": {
-#             "chicken": "tofu",
-#             "fish": "jackfruit",
-#             "beef": "tempeh",
-#             "pork": "jackfruit",
-#             "egg": "flax egg",
-#             "milk": "soy milk",
-#             "cheese": "vegan cheese",
-#             "yogurt": "coconut yogurt",
-#             "butter": "vegan butter",
-#             "honey": "maple syrup"
-#         }
-#     },
-#     "vegetarian": {
-#         "blocked": ["chicken", "fish", "beef", "pork"],
-#         "replacement": {
-#             "chicken": "paneer",
-#             "fish": "mushrooms",
-#             "beef": "soy chunks",
-#             "pork": "jackfruit"
-#         }
-#     },
-#     "pescatarian": {
-#         "blocked": ["chicken", "beef", "pork"],
-#         "replacement": {
-#             "chicken": "salmon",
-#             "beef": "tuna",
-#             "pork": "salmon"
-#         }
-#     },
-#     "gluten-free": {
-#         "blocked": ["wheat", "barley", "rye", "pasta", "all-purpose flour", "breadcrumbs"],
-#         "replacement": {
-#             "wheat": "gluten-free flour",
-#             "barley": "quinoa",
-#             "rye": "buckwheat",
-#             "pasta": "gluten-free pasta",
-#             "all-purpose flour": "gluten-free flour",
-#             "breadcrumbs": "crushed gluten-free crackers"
-#         }
-#     }
-# }
+dietary_rules = {
+    "none": {
+        "blocked": [],
+        "replacement": {}
+    },
+    "vegan": {
+        "blocked": ["chicken", "fish", "beef", "pork", "egg", "milk", "cheese", "yogurt", "butter", "honey"],
+        "replacement": {
+            "chicken": "tofu",
+            "fish": "jackfruit",
+            "beef": "tempeh",
+            "pork": "jackfruit",
+            "egg": "flax egg",
+            "milk": "soy milk",
+            "cheese": "vegan cheese",
+            "yogurt": "coconut yogurt",
+            "butter": "vegan butter",
+            "honey": "maple syrup"
+        }
+    },
+    "vegetarian": {
+        "blocked": ["chicken", "fish", "beef", "pork"],
+        "replacement": {
+            "chicken": "paneer",
+            "fish": "mushrooms",
+            "beef": "soy chunks",
+            "pork": "jackfruit"
+        }
+    },
+    "pescatarian": {
+        "blocked": ["chicken", "beef", "pork"],
+        "replacement": {
+            "chicken": "salmon",
+            "beef": "tuna",
+            "pork": "salmon"
+        }
+    },
+    "gluten-free": {
+        "blocked": ["wheat", "barley", "rye", "pasta", "all-purpose flour", "breadcrumbs"],
+        "replacement": {
+            "wheat": "gluten-free flour",
+            "barley": "quinoa",
+            "rye": "buckwheat",
+            "pasta": "gluten-free pasta",
+            "all-purpose flour": "gluten-free flour",
+            "breadcrumbs": "crushed gluten-free crackers"
+        }
+    }
+}
 
-# # -----------------------
-# # Helpers
-# # -----------------------
-# def normalize_ingredient_name(s: str) -> str:
-#     return s.strip().lower()
+# -----------------------
+# Helpers
+# -----------------------
+def normalize_ingredient_name(s: str) -> str:
+    return s.strip().lower()
 
-# def preprocess_ingredients(raw_ingredients: str, diet_key: str):
-#     """Replace blocked ingredients automatically and return (cleaned_string, replacements_list)."""
-#     items = [normalize_ingredient_name(i) for i in raw_ingredients.split(",") if i.strip()]
-#     processed = []
-#     replacements = []  # tuples (original, replaced)
-#     rules = dietary_rules.get(diet_key, dietary_rules["none"])
-#     blocked = set(rules["blocked"])
-#     repl_map = rules["replacement"]
+def preprocess_ingredients(raw_ingredients: str, diet_key: str):
+    """Replace blocked ingredients automatically and return (cleaned_string, replacements_list)."""
+    items = [normalize_ingredient_name(i) for i in raw_ingredients.split(",") if i.strip()]
+    processed = []
+    replacements = []  # tuples (original, replaced)
+    rules = dietary_rules.get(diet_key, dietary_rules["none"])
+    blocked = set(rules["blocked"])
+    repl_map = rules["replacement"]
 
-#     for it in items:
-#         # exact match replacement first
-#         if it in blocked:
-#             if it in repl_map:
-#                 processed.append(repl_map[it])
-#                 replacements.append((it, repl_map[it]))
-#             else:
-#                 # drop it (no replacement)
-#                 replacements.append((it, None))
-#         else:
-#             # also check partial matches (e.g., "chicken breast" -> "chicken")
-#             matched = False
-#             for b in blocked:
-#                 if b in it:
-#                     if b in repl_map:
-#                         # replace the blocked substring with replacement
-#                         new_it = it.replace(b, repl_map[b])
-#                         processed.append(new_it)
-#                         replacements.append((it, new_it))
-#                     else:
-#                         # drop the blocked substring entirely
-#                         new_it = re.sub(r"\b" + re.escape(b) + r"\b", "", it).strip()
-#                         if new_it:
-#                             processed.append(new_it)
-#                         replacements.append((it, None))
-#                     matched = True
-#                     break
-#             if not matched:
-#                 processed.append(it)
+    for it in items:
+        # exact match replacement first
+        if it in blocked:
+            if it in repl_map:
+                processed.append(repl_map[it])
+                replacements.append((it, repl_map[it]))
+            else:
+                # drop it (no replacement)
+                replacements.append((it, None))
+        else:
+            # also check partial matches (e.g., "chicken breast" -> "chicken")
+            matched = False
+            for b in blocked:
+                if b in it:
+                    if b in repl_map:
+                        # replace the blocked substring with replacement
+                        new_it = it.replace(b, repl_map[b])
+                        processed.append(new_it)
+                        replacements.append((it, new_it))
+                    else:
+                        # drop the blocked substring entirely
+                        new_it = re.sub(r"\b" + re.escape(b) + r"\b", "", it).strip()
+                        if new_it:
+                            processed.append(new_it)
+                        replacements.append((it, None))
+                    matched = True
+                    break
+            if not matched:
+                processed.append(it)
 
-#     # dedupe while preserving order
-#     seen = set()
-#     processed_unique = []
-#     for p in processed:
-#         if p not in seen:
-#             seen.add(p)
-#             processed_unique.append(p)
+    # dedupe while preserving order
+    seen = set()
+    processed_unique = []
+    for p in processed:
+        if p not in seen:
+            seen.add(p)
+            processed_unique.append(p)
 
-#     return ", ".join(processed_unique), replacements
+    return ", ".join(processed_unique), replacements
 
 def build_prompt(ingredients: str, num_recipes: int, diet: str, difficulty: str, servings: int):
-    # """
-    # Ask model for a JSON array of recipe objects. Each object:
-    # { "title", "servings", "ingredients": [...], "steps": [...], "difficulty", "estimated_time", "notes" }
-    # """
+    """
+    Ask model for a JSON array of recipe objects. Each object:
+    { "title", "servings", "ingredients": [...], "steps": [...], "difficulty", "estimated_time", "notes" }
+    """
     diet_wording = diet if diet != "none" else "no dietary restriction"
     difficulty_text = difficulty if difficulty != "Any" else "Any difficulty"
 
@@ -137,26 +137,9 @@ You are a helpful, precise recipe generator.
 Constraints:
 - Diet: {diet_wording}. STRICTLY follow this; do NOT include disallowed ingredients.
 - Difficulty: {difficulty_text}.
-You are an expert chef and nutritionist. Create a recipe based on the user's input, following these rules:
-
-1. INGREDIENTS:
-   - Always include the user-provided ingredients.
-   - If the user provided ingredients without quantities, assign realistic quantities using standard cooking measurements (grams, cups, tablespoons, teaspoons, etc.).
-   - Add any additional ingredients necessary to make the recipe balanced, flavorful, and complete.
-   - Respect the dietary preference strictly. If the preference conflicts with a given ingredient, replace it with a suitable alternative of the same function in the recipe, adjusting the quantity as needed.
-   - Make sure ingredient list has no duplicates and is easy to read.
-
-2. INSTRUCTIONS:
-   - Provide step-by-step instructions.
-   - Use clear, concise language.
-   - Ensure cooking times and temperatures are specified when relevant.
-
-3. NUTRITION FACTS:
-   - Calculate approximate per-serving nutrition values: calories, protein (g), fat (g), carbs (g), and fiber (g).
-   - Use standard food composition knowledge to estimate these values based on the ingredients and quantities.
-
-4. OUTPUT FORMAT:
-   Return the output in valid JSON with the structure:
+- Servings: approximately {servings} per recipe.
+- Use ONLY the provided ingredients (and common pantry items like salt, pepper, oil, water, sugar). Do NOT invent rare ingredients.
+- If any provided ingredient was automatically replaced, mention the replacement in the "notes" field for that recipe.
 
 Task:
 JSON Schema:
@@ -164,21 +147,11 @@ JSON Schema:
   {{
     "title": "string",
     "servings": integer,
-    "ingredients": [
-       {"name": "ingredient name", "quantity": "amount with unit"},
-       ...
-     ],
+    "ingredients": ["string", "string"],
     "steps": ["string", "string"],
     "difficulty": "Easy" | "Medium" | "Hard",
     "estimated_time": "string (e.g., '25 minutes')",
     "notes": "string"
-     "nutrition_per_serving": {
-       "calories": number,
-       "protein_g": number,
-       "fat_g": number,
-       "carbs_g": number,
-       "fiber_g": number
-     }
   }}
 ]
 
@@ -368,4 +341,3 @@ if generate:
                 
                 st.markdown(recipe_html, unsafe_allow_html=True)
             
-

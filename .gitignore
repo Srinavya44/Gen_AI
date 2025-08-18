@@ -1,3 +1,31 @@
-.env
-**/.env
+# Python bytecode files
+__pycache__/
+*.py[cod]
+
+# Virtual environments / Python libraries
+Lib/
 venv/
+env/
+.venv/
+.conda/
+*.egg-info/
+*.egg
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# IDE / editor settings
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Logs and temporary files
+*.log
+*.tmp
+*.bak
+*.env
