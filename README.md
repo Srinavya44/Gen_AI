@@ -71,13 +71,13 @@ This project involves setting up AWS services including S3, EC2, and Lambda, and
 ## AWS Project Screenshots
 
 ### S3 Bucket
-![S3 Bucket](AWS/s3_bucket.png)
+![S3 Bucket](./Week1/AWS/s3_bucket.png)
 
 ### EC2 Instance
-![EC2 Instance](AWS/ec2_instance.png)
+![EC2 Instance](./Week1/AWS/ec2_instance.png)
 
 ### Lambda Function
-![Lambda Function](AWS/lambda_function.png)
+![Lambda Function](./Week1/AWS/lambda_function.png)
 
 ## Notes
 - All services were created and tested in the AWS Free Tier environment.
@@ -243,8 +243,8 @@ Understand the difference between zero-shot and few-shot prompting in LLMs.
 **Deliverables**  
 - [`app.py`](./Week2/session1/assignment1/app.py) — Streamlit app to generate & compare outputs.  
 - [Report (DOCX)](./Week2/session1/assignment1/Zero%20shot%20vs%20few%20shot.docx) — Includes prompts, outputs, and observations.  
-- Screenshots of test runs.  
-![alt text](<zero shot vs few shot.png>)
+- Screenshot of test runs.  
+![zero shot vs few shot](./Week2/session1/assignment1/zero shot vs few shot.png)
 
 ---
 
@@ -293,7 +293,7 @@ Explore an open-source model from Hugging Face Hub and use it to perform a simpl
 **Deliverables**  
 - [`app.py`](./Week2/session2/assignment1/app.py) — Streamlit Fake News Detector app.  
 - Screenshot(s) of working application. 
-![alt text](fakenewsdetector.png) 
+![fakenewsdetector](./Week2/session2/assignment1/fakenewsdetector.png) 
 
 **How to Run**  
 ```bash
@@ -316,7 +316,6 @@ streamlit run app.py
 Install a local Large Language Model (LLM) using Ollama, run a simple test prompt, measure response time, and document troubleshooting steps.  
 
 ### Deliverables  
-- Screenshot of working LLM  
 - [Local LLM Report (DOCX)](./Week2/session2/assignment2/Local-LLM.docx) — contains:  
   - Installation steps  
   - Sample prompt and output  
