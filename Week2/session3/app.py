@@ -4,11 +4,12 @@ import requests
 import streamlit as st
 from dotenv import load_dotenv
 from groq import Groq
+from streamlit.components.v1 import html as st_html
 
 # --------------------------
 # Config
 # --------------------------
-st.set_page_config(page_title="Groq AI Chat", page_icon="🤖", layout="centered")
+st.set_page_config(page_title="Groq AI Playground", page_icon="🤖", layout="centered")
 load_dotenv()
 api_key = os.getenv("GROQ_API_KEY")
 client = Groq(api_key=api_key)
@@ -16,7 +17,20 @@ client = Groq(api_key=api_key)
 HISTORY_FILE = "chat_history.json"
 
 # --------------------------
-# Helpers (multi-chat)
+# Intro / Header
+# --------------------------
+st.markdown("""
+    <div style="text-align: center; padding: 30px;">
+        <h1 style="font-size: 36px; color: #6C63FF;">🤖 Groq AI Playground</h1>
+        <p style="font-size: 18px; color: #555;">
+            Experiment with <b>Text Generation</b> and <b>Chat</b> using Groq's LLMs.<br>
+            Switch modes from the sidebar and try prompts instantly.
+        </p>
+    </div>
+""", unsafe_allow_html=True)
+
+# --------------------------
+# Helpers (multi-chat for Chat Mode)
 # --------------------------
 def load_all_chats():
     if os.path.exists(HISTORY_FILE):
@@ -68,31 +82,14 @@ if not chat_id:  # first launch
 st.session_state["messages"] = messages
 
 # --------------------------
-# Sidebar (multi-chat)
+# Sidebar
 # --------------------------
 st.sidebar.header("⚙️ Settings")
 
-if st.sidebar.button("➕ New Chat"):
-    chat_id, st.session_state["all_chats"] = new_chat(st.session_state["all_chats"])
-    save_all_chats(st.session_state["all_chats"])
-    st.rerun()
+# Mode toggle
+mode = st.sidebar.radio("Mode", ["Chat", "Text Generation"], index=0)
 
-# list all chats with delete button
-for cid, chat in st.session_state["all_chats"]["chats"].items():
-    cols = st.sidebar.columns([4,1])
-    with cols[0]:
-        if st.button(chat["title"], key=f"select_{cid}"):
-            st.session_state["all_chats"]["active_chat"] = cid
-            save_all_chats(st.session_state["all_chats"])
-            st.rerun()
-    with cols[1]:
-        if st.button("🗑️", key=f"delete_{cid}"):
-            st.session_state["all_chats"] = delete_chat(st.session_state["all_chats"], cid)
-            save_all_chats(st.session_state["all_chats"])
-            st.rerun()
-
-# model + settings
-models = []
+# Model settings
 def get_available_models():
     try:
         url = "https://api.groq.com/openai/v1/models"
@@ -112,10 +109,11 @@ temperature = st.sidebar.slider("Creativity (temperature)", 0.0, 1.5, 0.7, 0.1)
 max_tokens = st.sidebar.slider("Max tokens", 50, 2000, 500, 50)
 
 # --------------------------
-# Styles (iMessage-like)
+# Global Styles
 # --------------------------
 st.markdown("""
 <style>
+/* Chat bubbles */
 .chat-row { display: flex; align-items: flex-start; margin: 8px 0; }
 .chat-bubble {
     display: inline-block;
@@ -136,111 +134,204 @@ st.markdown("""
     margin-right: auto; text-align: left;
     border-bottom-left-radius: 4px;
 }
-avatar { font-size: 20px; margin: 0 8px; }
+.avatar { font-size: 20px; margin: 0 8px; }
+
 </style>
 """, unsafe_allow_html=True)
 
 # --------------------------
-# Title / Welcome
+# TEXT GENERATION MODE (minimal, Clear without explicit rerun)
 # --------------------------
-if len([m for m in st.session_state["messages"] if m["role"] != "system"]) == 0:
+if mode == "Text Generation":
+    st.subheader("Text Generation")
+
+    # styles
     st.markdown("""
-        <div style="text-align: center; padding-top: 60px;">
-            <h1 style="font-size: 34px; color: #333;">🤖 Welcome to <span style="color:#6C63FF;">Groq AI Chat</span></h1>
-            <p style="color: #666; font-size: 18px;">Ask me anything and I’ll respond instantly.</p>
-        </div>
+    <style>
+      .tg-card{
+        background:#fff; border:1px solid #e5e7eb; border-radius:16px;
+        padding:18px; box-shadow:0 2px 10px rgba(0,0,0,.04); margin-top:8px;
+      }
+      .tg-bubble{
+        background:#f1f0f0; color:#000;
+        border-radius:16px; border-bottom-left-radius:4px;
+        padding:12px 14px; line-height:1.55; font-size:15px;
+        margin-top:10px;
+      }
+    </style>
     """, unsafe_allow_html=True)
-else:
-    st.title("🤖 Groq AI Chat")
+
+    # session state
+    st.session_state.setdefault("tg_prompt", "")
+    st.session_state.setdefault("tg_output", "")
+
+    # clear handler (no explicit st.rerun)
+    def clear_tg():
+        st.session_state["tg_prompt"] = ""
+        st.session_state["tg_output"] = ""
+
+    # input card
+    tg_prompt = st.text_area(
+        "Prompt",
+        key="tg_prompt",     # bound to session state so clearing works
+        height=140,
+        placeholder="Type your prompt here...",
+        label_visibility="collapsed"
+    )
+    SYSTEM_INSTRUCT = (
+    "You are a concise, professional writing assistant. "
+    "Write fluent, natural English. Do not output code or token-like strings.")
+    c1, c2 = st.columns([1,1])
+    generate_clicked = c1.button("Generate", type="primary", use_container_width=True)
+    c2.button("Clear", type="secondary", use_container_width=True, on_click=clear_tg)
+    # generate
+    if generate_clicked and tg_prompt.strip():
+        try:
+            with st.spinner("Generating…"):
+                response = client.chat.completions.create(
+                    model=selected_model,
+                    messages=[
+                        {"role": "system", "content": SYSTEM_INSTRUCT},
+                        {"role": "user", "content": tg_prompt}],
+                    max_tokens=max_tokens,
+                    temperature=temperature,
+                )
+            st.session_state["tg_output"] = (response.choices[0].message.content or "").strip()
+        except Exception as e:
+            st.error(f"❌ Error: {str(e)}")
+
+    # output bubble
+    if st.session_state["tg_output"]:
+        def _escape_html(s: str) -> str:
+            return (
+                s.replace("&", "&amp;")
+                 .replace("<", "&lt;")
+                 .replace(">", "&gt;")
+                 .replace("\n", "<br>")
+            )
+        st.markdown(
+            f'<div class="tg-bubble">{_escape_html(st.session_state["tg_output"])}</div>',
+            unsafe_allow_html=True
+        )
 
 # --------------------------
-# Render history (skip system)
+# CHAT MODE (fixed + robust)
 # --------------------------
-for msg in st.session_state["messages"]:
-    role = msg["role"]
-    if role == "system":
-        continue
-    content = msg["content"]
-    if role == "user":
+else:
+    # st.subheader("Chat with Groq AI")
+
+    # Sidebar chat controls
+    if st.sidebar.button("➕ New Chat"):
+        chat_id, st.session_state["all_chats"] = new_chat(st.session_state["all_chats"])
+        save_all_chats(st.session_state["all_chats"])
+        st.rerun()
+
+    # Snapshot list so deleting while iterating is safe
+    chat_items = list(st.session_state["all_chats"]["chats"].items())
+
+    for cid, chat in chat_items:
+        cols = st.sidebar.columns([4, 1])
+        with cols[0]:
+            if st.button(chat["title"], key=f"select_{cid}"):
+                st.session_state["all_chats"]["active_chat"] = cid
+                save_all_chats(st.session_state["all_chats"])
+                st.rerun()
+        with cols[1]:
+            if st.button("🗑️", key=f"delete_{cid}"):
+                st.session_state["all_chats"] = delete_chat(st.session_state["all_chats"], cid)
+                save_all_chats(st.session_state["all_chats"])
+                st.rerun()
+
+    # Guard: ensure we always have a valid active chat + messages list
+    active_chat = st.session_state["all_chats"].get("active_chat")
+    if not active_chat or active_chat not in st.session_state["all_chats"]["chats"]:
+        chat_id, st.session_state["all_chats"] = new_chat(st.session_state["all_chats"])
+        save_all_chats(st.session_state["all_chats"])
+        active_chat = chat_id
+
+    st.session_state["messages"] = st.session_state["all_chats"]["chats"][active_chat].get("messages", [])
+    if not isinstance(st.session_state["messages"], list):
+        st.session_state["messages"] = []
+
+    # Render history
+    for msg in st.session_state["messages"]:
+        if msg.get("role") == "system":
+            continue
+        role = msg.get("role", "")
+        content = msg.get("content", "")
+        if role == "user":
+            st.markdown(
+                f"""
+                <div class="chat-row" style="justify-content: flex-end;">
+                    <div class="chat-bubble user">{content}</div>
+                    <div class="avatar">🧑</div>
+                </div>
+                """,
+                unsafe_allow_html=True,
+            )
+        else:
+            st.markdown(
+                f"""
+                <div class="chat-row" style="justify-content: flex-start;">
+                    <div class="avatar">🤖</div>
+                    <div class="chat-bubble assistant">{content}</div>
+                </div>
+                """,
+                unsafe_allow_html=True,
+            )
+
+    # Chat input
+    prompt = st.chat_input("Type your message here...")
+    if prompt:
+        st.session_state["messages"].append({"role": "user", "content": prompt})
+
+        if st.session_state["all_chats"]["chats"][active_chat]["title"] == "Untitled Chat":
+            st.session_state["all_chats"]["chats"][active_chat]["title"] = prompt[:30]
+
+        st.session_state["all_chats"]["chats"][active_chat]["messages"] = st.session_state["messages"]
+        save_all_chats(st.session_state["all_chats"])
+
         st.markdown(
             f"""
             <div class="chat-row" style="justify-content: flex-end;">
-                <div class="chat-bubble user">{content}</div>
+                <div class="chat-bubble user">{prompt}</div>
                 <div class="avatar">🧑</div>
             </div>
             """,
             unsafe_allow_html=True,
         )
-    else:
-        st.markdown(
-            f"""
-            <div class="chat-row" style="justify-content: flex-start;">
-                <div class="avatar">🤖</div>
-                <div class="chat-bubble assistant">{content}</div>
-            </div>
-            """,
-            unsafe_allow_html=True,
-        )
 
-# --------------------------
-# Input + Streaming
-# --------------------------
-prompt = st.chat_input("Type your message here...")
+        placeholder = st.empty()
+        streamed = ""
 
-if prompt:
-    # 1) Record user message
-    st.session_state["messages"].append({"role": "user", "content": prompt})
+        try:
+            stream = client.chat.completions.create(
+                model=selected_model,
+                messages=st.session_state["messages"],
+                max_tokens=max_tokens,
+                temperature=temperature,
+                stream=True,
+            )
 
-    # update title if needed
-    active_chat = st.session_state["all_chats"]["active_chat"]
-    if st.session_state["all_chats"]["chats"][active_chat]["title"] == "Untitled Chat":
-        st.session_state["all_chats"]["chats"][active_chat]["title"] = prompt[:30]
+            for chunk in stream:
+                if getattr(chunk, "choices", None):
+                    delta = getattr(chunk.choices[0], "delta", None)
+                    token = getattr(delta, "content", None) if delta else None
+                    if token:
+                        streamed += token
+                        placeholder.markdown(
+                            f"""
+                            <div class="chat-row" style="justify-content: flex-start;">
+                                <div class="avatar">🤖</div>
+                                <div class="chat-bubble assistant">{streamed}</div>
+                            </div>
+                            """,
+                            unsafe_allow_html=True,
+                        )
 
-    st.session_state["all_chats"]["chats"][active_chat]["messages"] = st.session_state["messages"]
-    save_all_chats(st.session_state["all_chats"])
+            st.session_state["messages"].append({"role": "assistant", "content": streamed})
+            st.session_state["all_chats"]["chats"][active_chat]["messages"] = st.session_state["messages"]
+            save_all_chats(st.session_state["all_chats"])
 
-    # 2) Show user's bubble immediately
-    st.markdown(
-        f"""
-        <div class="chat-row" style="justify-content: flex-end;">
-            <div class="chat-bubble user">{prompt}</div>
-            <div class="avatar">🧑</div>
-        </div>
-        """,
-        unsafe_allow_html=True,
-    )
-
-    # 3) Stream assistant reply
-    placeholder = st.empty()
-    streamed = ""
-
-    try:
-        stream = client.chat.completions.create(
-            model=selected_model,
-            messages=st.session_state["messages"],
-            max_tokens=max_tokens,
-            temperature=temperature,
-            stream=True,
-        )
-
-        for chunk in stream:
-            if chunk.choices and getattr(chunk.choices[0].delta, "content", None):
-                token = chunk.choices[0].delta.content
-                streamed += token
-                placeholder.markdown(
-                    f"""
-                    <div class="chat-row" style="justify-content: flex-start;">
-                        <div class="avatar">🤖</div>
-                        <div class="chat-bubble assistant">{streamed}</div>
-                    </div>
-                    """,
-                    unsafe_allow_html=True,
-                )
-
-        # 4) Save final assistant message
-        st.session_state["messages"].append({"role": "assistant", "content": streamed})
-        st.session_state["all_chats"]["chats"][active_chat]["messages"] = st.session_state["messages"]
-        save_all_chats(st.session_state["all_chats"])
-
-    except Exception as e:
-        st.error(f"❌ Streaming Error: {str(e)}")
+        except Exception as e:
+            st.error(f"❌ Streaming Error: {str(e)}")
