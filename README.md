@@ -3,356 +3,300 @@
 This repository contains my Generative AI assignments completed during training.
 
 ## 📂 Quick Links  
-- [Week 1](#-week-1)
-- [Week 2](#-week-2)
+- [Week 1](#-week-1)  
+  - [Day 1: Calculator & To-Do List](#day-1--task-1-calculator--to-do-list)  
+  - [Day 2: AWS S3, EC2 & Lambda Calculator](#day-2--task-1-aws-s3-ec2--lambda-calculator)  
+  - [Day 3: Rainbow Response](#day-3--task-1-rainbow-response)  
+  - [Day 3: Poem Generator](#day-3--task-2-poem-generator)  
+  - [Day 4: Text Splitter](#day-4--task-1-text-splitter)  
+  - [Day 4: RetrievalQA](#day-4--task-2-retrievalqa)  
+  - [Day 5: Bedrock Recipe Generator](#day-5--task-1-bedrock-recipe-generator)  
 
- ## 📂 Week 1  
+- [Week 2](#-week-2)  
+  - [Day 2: ZeroShot vs FewShot](#day-2--task-1-zeroshot-vs-fewshot)  
+  - [Day 2: Role-Based CoT](#day-2--task-2-role-based-cot)  
+  - [Day 3: Fake News Detector](#day-3--task-1-fake-news-detector)  
+  - [Day 4: Local LLM Poem](#day-4--task-1-local-llm-poem)  
+  - [Day 4: Hands-On Text Generation & Chat](#day-4--task-2-hands-on-text-generation--chat)  
 
-This week focused on **introductory AI projects** like a To-Do List app, AWS setup, and simple Groq-based tasks (rainbow explanation, poem generator, RetrievalQA, chunking).  
-
-# To-Do List
-
-[Folder Link: TODO](./Week1/TODO/)
-
-## Original Requirement
-Build a simple to-do list application.
-## My Implementation
-I created a **Streamlit-based To-Do List app** that allows users to:
-- Add new tasks.
-- Mark tasks as completed.
-- Delete tasks.
-- Filter tasks based on status (All, Pending, Completed).
-- Assign priority levels to tasks (High, Medium, Low).
-
-The tasks are stored in a `tasks.json` file so that they persist between sessions.
-
-## Features
-- **Task Management:** Add, complete, and delete tasks.
-- **Prioritization:** Assign each task a High, Medium, or Low priority.
-- **Filtering:** View all tasks, only pending tasks, or only completed tasks.
-- **Progress Overview:** Displays counts of completed, pending, and total tasks.
-- **Persistent Storage:** Saves tasks to a JSON file.
-
-<img width="1920" height="953" alt="todo ss" src="https://github.com/user-attachments/assets/9b9f8207-eb35-4343-94cc-f6ca72dc1946" />
+- [Week 3](#-week-3)  
+  - [Day 1: Loan Calculator App](#day-1--task-1-loan-calculator-app)  
+  - [Day 1: ChatApp (Groq + OpenAI)](#day-1--task-2-chatapp-groq--openai)  
+  - [Day 2: MultiAgent RAG System](#day-2--task-1-multiagent-rag-system)  
 
 ---
 
-# AWS Setup and Calculator Lambda
+## 📂 Week 1  
 
-[Folder Link: AWS](./Week1/AWS/)
-
-## Overview
-This project involves setting up AWS services including S3, EC2, and Lambda, and deploying a Python-based calculator function.
-
-## Steps Completed
-
-### 1. AWS Free Tier Account
-- Created and configured an AWS Free Tier account.
-
-### 2. S3 Bucket Creation
-- Created an S3 bucket named **my-test-bucket-navya-44**.
-- Verified successful creation and access through the AWS S3 Console.
-- Bucket is ready to store and manage objects.
-
-### 3. EC2 Instance Launch
-- Launched an EC2 instance.
-- **Instance Name:** Calculator instance.
-
-### 4. AWS Lambda: Python Calculator Script
-- Created a Lambda function named **Calculator**.
-- Used **Python 3.13** runtime.
-- Wrote and deployed a basic calculator function supporting:
-  - Addition
-  - Subtraction
-  - Multiplication
-  - Division
-- Successfully tested the function with sample input.
-
-## AWS Project Screenshots
-
-### S3 Bucket
-![S3 Bucket](./Week1/AWS/s3_bucket.png)
-
-### EC2 Instance
-![EC2 Instance](./Week1/AWS/ec2_instance.png)
-
-### Lambda Function
-![Lambda Function](./Week1/AWS/lambda_function.png)
-
-## Notes
-- All services were created and tested in the AWS Free Tier environment.
-- The Lambda function can be extended to handle more operations as needed.
+This week covered Python basics, AWS setup, and introductory Generative AI (rainbow explanation, poem generation, RAG pipeline, and Bedrock deployment).  
 
 ---
 
-## Assignments of Session 3 and 4
-1. [Task 1 – Rainbow Explanation (Groq AI)](#task-1--rainbow-explanation-groq-ai) 
-2. [Task 2 – Poem Generator](#task-2--poem-generator)
-3. [Task 3 – RetrievalQA: Company Policy Q&A System](#task-3--retrievalqa-company-policy-qa-system)
-4. [Task 4 – Document Loader & Chunk Counter](#task-4--document-loader--chunk-counter)
+### Day 1 – Task 1: Calculator & To-Do List  
+[Folder Link](./Week1/Day1_Basics_of_Python/Task1_Calculator_ToDoList/)
+
+A **Streamlit To-Do List app** with persistent JSON storage.  
+
+**Key Features & Enhancements**  
+- Add, complete, delete, and filter tasks  
+- Priority levels (High/Medium/Low)  
+- Progress summary (pending vs completed)  
+- Tasks saved in JSON to persist across sessions  
+
+![To-Do List Screenshot](./Week1/Day1_Basics_of_Python/Task1_Calculator_ToDoList/todo%20ss.png)
 
 ---
 
-## Task 1 – Rainbow Explanation (Groq AI)
+### Day 2 – Task 1: AWS S3, EC2 & Lambda Calculator  
+[Folder Link](./Week1/Day2_Basics_of_Cloud/Task1_AWS_S3_Account_Setup/)
 
-[Folder Link: Rainbows](./Week1/Rainbows/)
+Configured **AWS S3, EC2, and Lambda** to deploy a Python calculator.  
 
-### Original Requirement  
-Write a Python script to send the prompt **"Explain how rainbows are formed"** using OpenAI’s GPT-3.5 Turbo or Hugging Face Transformers, and print the response.
+**Key Features & Enhancements**  
+- Created S3 bucket for storage  
+- Launched EC2 instance for compute  
+- Lambda calculator function (Add/Subtract/Multiply/Divide)  
+- Tested end-to-end successfully on AWS Free Tier  
 
-### My Implementation  
-I created a Python chatbot using **Groq AI’s LLaMA-3** model via the Groq API.  
-The script:
-- Accepts a prompt from the user (in this case, *"Explain how rainbows are formed"*).  
-- Sends it to the selected LLaMA-3 model.
-- Prints the AI-generated explanation to the interface.
-
-### Additional Enhancements  
-- Built a **Streamlit** web interface instead of a console script.  
-- Added model selection (`llama3-8b-8192` or `llama3-70b-8192`).  
-- Styled chat messages with user/AI avatars and preserved chat history in the session.
-- <img width="1920" height="1687" alt="rainbow ss" src="https://github.com/user-attachments/assets/d00d2fba-0b12-486e-9b76-8075eb730c82" />
+![AWS S3 Screenshot](./Week1/Day2_Basics_of_Cloud/Task1_AWS_S3_Account_Setup/s3_bucket.png)  
+![AWS EC2 Screenshot](./Week1/Day2_Basics_of_Cloud/Task1_AWS_S3_Account_Setup/ec2_instance.png)  
+![AWS Lambda Screenshot](./Week1/Day2_Basics_of_Cloud/Task1_AWS_S3_Account_Setup/lambda_function.png)
 
 ---
 
-## Task 2 – Poem Generator
+### Day 3 – Task 1: Rainbow Response  
+[Folder Link](./Week1/Day3_Basics_of_GenAI/Task1_Rainbow_Response_HF/)
 
-[Folder Link: poem](./Week1/poem/)
+Prompted **Groq LLaMA-3** to explain rainbow formation.  
 
-### Original Requirement  
-Use the Transformers library from Hugging Face to load a model and generate text from the prompt:  
-*"Write a small poem about the ocean"*. Print the result.
+**Key Features & Enhancements**  
+- Streamlit app (instead of console script)  
+- Model selection (LLaMA 8B or 70B)  
+- Chat-style UI with avatars & preserved history  
 
-### My Implementation  
-I fulfilled the text-generation requirement using **Groq AI’s LLaMA-3** model to produce the poem.  
-The app:
-- Accepts a topic as input.
-- Generates a 10-line poem about that topic.
-
-### Additional Enhancements  
-- Added **AI-generated artwork** for the poem using **Hugging Face’s Stable Diffusion**.  
-- Designed a **polished, gradient-based Streamlit UI** with equal-height content cards.  
-- Allowed any topic (not just “ocean”), making it reusable for more prompts.  
-- Displayed the poem and artwork side-by-side for a complete creative output.
-
-<img width="1920" height="1421" alt="poem ss" src="https://github.com/user-attachments/assets/bc806054-1099-450c-9020-e6ed79689b39" />
+![Rainbow Response Screenshot](./Week1/Day3_Basics_of_GenAI/Task1_Rainbow_Response_HF/rainbow%20ss.png)
 
 ---
 
-## Task 3 – RetrievalQA: Company Policy Q&A System
+### Day 3 – Task 2: Poem Generator  
+[Folder Link](./Week1/Day3_Basics_of_GenAI/Task2_Ocean_Poem_HF/)
 
-[Folder Link: rag_ui](./Week1/rag_ui/)
+Generates **AI poems** on any topic.  
 
-### Original Requirement  
-Using RetrievalQA, create a pipeline that can answer the question:  
-*"What is the refund policy?"* based on a sample company policy document.
+**Key Features & Enhancements**  
+- Topic-based poem generation (not limited to “ocean”)  
+- Added **AI artwork** using Hugging Face Stable Diffusion  
+- Stylish Streamlit UI with side-by-side poem + artwork  
+- Reusable for multiple creative prompts  
 
-### My Implementation  
-I built a RetrievalQA system that:
-- Loads the policy document.
-- Uses embeddings to find relevant sections.
-- Passes them to an LLM to generate the answer.
-
-### Additional Enhancements  
-- Allowed **multiple PDF/TXT uploads**, not just one document.  
-- Built a **RAG pipeline** using:
-  - `CohereEmbeddings` for vectorization.
-  - `FAISS` for vector storage.
-  - **Groq AI LLaMA-3** for answer generation.  
-- Added answer style toggle (Concise/Detailed).  
-- Displayed sources with page numbers and file names.  
-- Included a **sidebar history** with quick re-run and download options for cited documents.
-
-<img width="1920" height="826" alt="rag1" src="https://github.com/user-attachments/assets/53cb279b-cefc-4a41-a749-faa7343213cd" />
-<img width="1920" height="1585" alt="rag2" src="https://github.com/user-attachments/assets/c1ad206b-7fe2-4038-b820-7d3d0218ba62" />
+![Poem Generator Screenshot](./Week1/Day3_Basics_of_GenAI/Task2_Ocean_Poem_HF/poem%20ss.png)
 
 ---
 
-## Task 4 – Document Loader & Chunk Counter
+### Day 4 – Task 1: Text Splitter  
+[Folder Link](./Week1/Day4_Basics_of_RAG/Task1_TextSplitter_LangChain/)
 
-[Folder Link: chunks](./Week1/chunks/)
+Chunked `.pdf`/`.txt` files using LangChain.  
 
-### Original Requirement  
-Load a `.txt` or `.pdf` file using LangChain’s `TextLoader` and split it using `RecursiveCharacterTextSplitter`. Print the total number of document chunks created.
+**Key Features & Enhancements**  
+- Supports both PDF and TXT formats  
+- RecursiveCharacterTextSplitter (configurable size & overlap)  
+- Handles multiple files in one run  
+- Automatic whitespace cleaning before chunking  
 
-### My Implementation  
-I wrote a Python script that:
-- Reads `.pdf` and `.txt` files from a `data` folder.
-- Loads them with `PyPDFLoader` or `TextLoader`.
-- Cleans whitespace before splitting.
-- Splits into chunks of 1000 characters with an overlap of 100.
-- Prints the total number of chunks created.
-
-### Additional Enhancements  
-- Supported **multiple files** at once instead of a single file.  
-- Automatically finds all `.pdf` and `.txt` files in the `data` folder.  
-- Made chunk size and overlap easily configurable in the code.
-
-<img width="1880" height="712" alt="chunks" src="https://github.com/user-attachments/assets/6d26a578-7677-468b-a4da-24a72b8c85f0" />
-
----
-## 🍳 AI Recipe Generator(AWS Bedrock + Streamlit)
-
-[Folder Link: AI Recipe Generator](./Week1/AWSBedrock/)
-
-### Overview
-An interactive **Streamlit web app** that uses **AWS Bedrock** with LLaMA 3 to generate creative and dietary-compliant recipes based on the ingredients you have.  
-
-This app automatically filters or replaces ingredients to match dietary restrictions such as vegan, vegetarian, pescatarian, and gluten-free. You just list your ingredients, choose preferences, and let AI cook up something delicious.
+![Text Splitter Screenshot](./Week1/Day4_Basics_of_RAG/Task1_TextSplitter_LangChain/data/chunks.png)
 
 ---
 
-##  Features
+### Day 4 – Task 2: RetrievalQA  
+[Folder Link](./Week1/Day4_Basics_of_RAG/Task2_RetrievalQA/)
 
-- **Dietary Restrictions Support**
-  - Vegan, Vegetarian, Pescatarian, Gluten-Free, or No restriction
-  - Automatic ingredient replacement or removal
--  **Customizable Recipe Output**
-   - Choose number of recipes (1–5)
-   - Select difficulty (Any, Easy, Medium, Hard)
-   - Set servings count
--  **AI-Powered**
-   - Uses AWS Bedrock with `meta.llama3-8b-instruct-v1:0` for recipe generation
--  **Beautiful UI**
-   - Styled recipe cards with sections for ingredients, steps, and notes
+Built a **RAG pipeline** for document-based Q&A.  
 
-<img width="1920" height="2291" alt="AI Recipe Generator" src="https://github.com/user-attachments/assets/aa6f1746-3151-4ade-b8ce-254d4f44967a" />
+**Key Features & Enhancements**  
+- Multi-file PDF/TXT upload  
+- FAISS vector DB + Cohere embeddings  
+- Groq LLaMA-3 for Q&A generation  
+- Answer style toggle (Concise/Detailed)  
+- Source citation with page numbers & file names  
+- Sidebar history with quick re-run & downloads  
+
+![RetrievalQA Screenshot 1](./Week1/Day4_Basics_of_RAG/Task2_RetrievalQA/rag1.png)  
+![RetrievalQA Screenshot 2](./Week1/Day4_Basics_of_RAG/Task2_RetrievalQA/rag2.png)
+
+---
+
+### Day 5 – Task 1: Bedrock Recipe Generator  
+[Folder Link](./Week1/Day5_Amazon_Bedrock/Task1_Bedrock_Project_Deployment/)
+
+A **Streamlit app** powered by AWS Bedrock (LLaMA-3) to generate custom recipes.  
+
+**Key Features & Enhancements**  
+- Dietary filters: Vegan, Vegetarian, Pescatarian, Gluten-free  
+- Auto ingredient replacement/removal  
+- Customizable servings, difficulty, and recipe count  
+- Stylish recipe cards with ingredients, steps, and notes  
+
+![AI Recipe Generator Screenshot](./Week1/Day5_Amazon_Bedrock/Task1_Bedrock_Project_Deployment/AI%20Recipe%20Generator.png)
+
 
 
 ## 📂 Week 2  
 
-This week focused on **Prompt Engineering** (Session 1) and **Exploring Open Source LLMs with Local Setup** (Session 2).  
+This week focused on **Prompt Engineering** and **Open Source LLMs** (both cloud and local setups).  
 
 ---
 
-## Session 1: Prompt Engineering  
+### Day 2 – Task 1: ZeroShot vs FewShot  
+[Folder Link](./Week2/Day2_Prompt_Engineering/Task1_ZeroShot_vs_FewShot/)  
 
-### 📝 Assignment 1: Zero-shot vs Few-shot Prompting  
+Compared **zero-shot vs few-shot prompting** on creative tasks like movie pitch generation.  
 
-[Folder Link: Assignment 1](./Week2/session1/assignment1/) 
-
-**Objective**  
-Understand the difference between zero-shot and few-shot prompting in LLMs.  
-
-**Description**  
-- **Zero-shot prompting:** Instruction given without examples.  
-- **Few-shot prompting:** Instruction preceded by 2–3 examples to guide the model’s style.  
-- Tested on multiple creative tasks (movie pitch generation).  
-- Compared outputs for accuracy, style, and consistency.  
+**Key Features & Enhancements**  
+- Streamlit app to generate & compare outputs  
+- Showed how few-shot improves style consistency  
+- Report with side-by-side outputs and analysis  
 
 **Deliverables**  
-- [`app.py`](./Week2/session1/assignment1/app.py) — Streamlit app to generate & compare outputs.  
-- [Report (DOCX)](./Week2/session1/assignment1/Zero%20shot%20vs%20few%20shot.docx) — Includes prompts, outputs, and observations.  
-- Screenshot of test runs.  
-![alt text](<Week2/session1/assignment1/zero shot vs few shot.png>)
+- [`app.py`](./Week2/Day2_Prompt_Engineering/Task1_ZeroShot_vs_FewShot/app.py)  
+- [Report (DOCX)](./Week2/Day2_Prompt_Engineering/Task1_ZeroShot_vs_FewShot/Zero%20shot%20vs%20few%20shot.docx)  
+
+![ZeroShot vs FewShot Screenshot](./Week2/Day2_Prompt_Engineering/Task1_ZeroShot_vs_FewShot/zero%20shot%20vs%20few%20shot.png)
 
 ---
 
-### 📝 Assignment 2: Role-based & Chain-of-Thought Prompting  
+### Day 2 – Task 2: Role-Based CoT  
+[Folder Link](./Week2/Day2_Prompt_Engineering/Task2_Role_Based_CoT/)  
 
-[Folder Link: Assignment 2](./Week2/session1/assignment2/)  
+Explored **role-based prompting** and **chain-of-thought reasoning**.  
 
-**Objective**  
-Learn how role-based and chain-of-thought prompting improve the quality of LLM responses.  
-
-**Description**  
-- **Role-based prompting:** Assigned roles (e.g., *Tour Guide*, *Luxury Agent*, *Foodie*) to adapt response style.  
-- **Chain-of-Thought prompting:** Instructed the model to think step by step, producing more structured reasoning.  
-- Compared outputs across creative and reasoning-based tasks (e.g., travel itineraries).  
+**Key Features & Enhancements**  
+- Role-based outputs (Tour Guide, Foodie, Luxury Agent, etc.)  
+- Chain-of-thought for structured reasoning  
+- Streamlit app with prompt comparisons  
+- Outputs documented for review  
 
 **Deliverables**  
-- [`app.py`](./Week2/session1/assignment2/app.py) — Streamlit app to generate & compare outputs.  
-- [Report (DOCX)](./Week2/session1/assignment2/role%20vs%20cot.docx) —  Includes prompts, outputs, and observations.  
-- [Screenshots of outputs(pdf)](./Week2/session1/assignment2/role%20vs%20cot%20outputs.pdf) -for each prompt type.  
+- [`app.py`](./Week2/Day2_Prompt_Engineering/Task2_Role_Based_CoT/app.py)  
+- [Report (DOCX)](./Week2/Day2_Prompt_Engineering/Task2_Role_Based_CoT/role%20vs%20cot.docx)  
+- [Screenshots (PDF)](./Week2/Day2_Prompt_Engineering/Task2_Role_Based_CoT/role%20vs%20cot%20outputs.pdf)  
 
 ---
 
-## Session 2: Open Source LLMs & Local Setup  
+### Day 3 – Task 1: Fake News Detector  
+[Folder Link](./Week2/Day3_Running_OpenSource_LLM/Task1_TextClassification_Summarization/)  
 
-### 📝 Assignment 1: Hugging Face Model Exploration  
-**Project:** Fake News Detector 
+A **Streamlit app** using Hugging Face model `Pulk17/Fake-News-Detection` to classify text as Real or Fake.  
 
-[Folder Link: Assignment 1](./Week2/session2/assignment1/)  
-
-**Objective**  
-Explore an open-source model from Hugging Face Hub and use it to perform a simple NLP task.  
-
-**Description**  
-- Set up a Python virtual environment and installed `transformers` and `torch`.  
-- Selected the model **Pulk17/Fake-News-Detection** from Hugging Face Hub.  
-- Built a **Streamlit web app** that classifies input news headlines or short articles as **Fake** or **Real**.  
-- Added extra features like confidence scoring, low-confidence warnings, and a history of recent checks.  
-
-**Features**  
-- Input box or sample text options.  
-- Prediction displayed as **Real** or **Fake** news.  
-- Confidence percentage with a progress bar.  
-- Warning for low-confidence predictions (< 60%).  
-- Sidebar with history of last 5 checks.  
+**Key Features & Enhancements**  
+- Confidence scoring with progress bar  
+- Low-confidence warnings (<60%)  
+- Sidebar with last 5 checks  
+- User-friendly text box with sample inputs  
 
 **Deliverables**  
-- [`app.py`](./Week2/session2/assignment1/app.py) — Streamlit Fake News Detector app.  
-- Screenshot(s) of working application. 
-![fakenewsdetector](./Week2/session2/assignment1/fakenewsdetector.png)
+- [`app.py`](./Week2/Day3_Running_OpenSource_LLM/Task1_TextClassification_Summarization/app.py)  
+- Screenshot of app output  
 
-
-**How to Run**  
-```bash
-# 1. Create virtual environment
-python -m venv venv
-source venv/bin/activate   # On Windows: venv\Scripts\activate
-
-# 2. Install dependencies
-pip install -r requirements.txt
-
-# 3. Run the Streamlit app
-streamlit run app.py
-```
----
-### Assignment 2: Local LLM Installation and Testing
-
-[Folder Link: Assignment 2](./Week2/session2/assignment2/)  
-
-### Objective  
-Install a local Large Language Model (LLM) using Ollama, run a simple test prompt, measure response time, and document troubleshooting steps.  
-
-### Deliverables  
-- [Local LLM Report (DOCX)](./Week2/session2/assignment2/Local-LLM.docx) — contains:  
-  - Installation steps  
-  - Sample prompt and output  
-  - Response time measurement  
-  - Troubleshooting notes  
-  - Reflection on performance and installation experience  
-  ---
-## Session 3
-
-### Task  
-Build Python scripts for **text generation** and **chat**, with error handling, streaming responses, and best practices.
-
-[Folder Link: session 3](./Week2/session3/)  
-
-### Overview  
-An interactive multi-mode interface built with **Streamlit** and **Groq API**.  
-This app lets users experiment with both **Text Generation** (single-shot outputs) and **Chat** (multi-turn conversations) in a clean iMessage-like UI.  
+![Fake News Detector Screenshot](./Week2/Day3_Running_OpenSource_LLM/Task1_TextClassification_Summarization/fakenewsclassification.png)
 
 ---
 
-### 📌 Features
-- **Two Modes**:  
-  - **Text Generation**: Generate standalone responses inside a minimal card UI.  
-  - **Chat**: Hold multi-turn conversations across multiple sessions.  
-- **Streaming Responses**: Watch tokens stream live for a smooth, responsive feel.  
-- **Error Handling**: Graceful error messages for API and network issues.  
-- **Multi-Chat Management**: Create, delete, and switch between multiple conversations.  
-- **Persistent History**: All chats stored in `chat_history.json`, restored automatically on reload.  
-- **Customizable Settings**: Choose from multiple Groq models, adjust creativity (temperature), and set max tokens.  
-- **Polished UI**: Modern iMessage-like chat bubbles with avatars; card-style text generation output.  
+### Day 4 – Task 1: Local LLM Poem  
+[Folder Link](./Week2/Day4_Calling_LLM_Python/Task1_AI_Poem_LocalLLMWeek3/)  
+
+Installed and tested a **local LLM with Ollama**.  
+
+**Highlights**  
+- Setup instructions & troubleshooting  
+- Generated a sample poem and measured response time  
+- Reflections on performance documented  
+
+**Deliverables**  
+- [Report (DOCX)](./Week2/Day4_Calling_LLM_Python/Task1_AI_Poem_LocalLLMWeek3/local%20llm%20ollama.docx)  
 
 ---
 
-### 📸 Screenshots
-**Text Generation Mode**  
-![text mode](./Week2/session3/images/text.png)  
+### Day 4 – Task 2: Hands-On Text Generation & Chat  
+[Folder Link](./Week2/Day4_Calling_LLM_Python/Hands_On_Text_Genaration_and_Chat/)  
 
-**Chat Mode**  
-![chat mode](./Week2/session3/images/chat.png)  
+A **Streamlit app** built with **Groq API** for text generation and chat.  
+
+**Key Features & Enhancements**  
+- Two modes: Text Generation & Multi-turn Chat  
+- Streaming responses with error handling  
+- Multi-chat management with persistent history  
+- Customizable model, temperature, and tokens  
+- Polished UI with avatars & iMessage-style bubbles  
+
+**Deliverables**  
+- [`app.py`](./Week2/Day4_Calling_LLM_Python/Hands_On_Text_Genaration_and_Chat/app.py)  
+- Screenshots of both modes  
+
+**Screenshots**  
+![Text Generation Mode](./Week2/Day4_Calling_LLM_Python/Hands_On_Text_Genaration_and_Chat/images/text.png)  
+![Chat Mode](./Week2/Day4_Calling_LLM_Python/Hands_On_Text_Genaration_and_Chat/images/chat.png)
+
+
+---
+## 📂 Week 3  
+
+This week focused on **Streamlit Basics** and **AI Agent Basics**.  
+
+---
+
+### Day 1 – Task 1: Loan Calculator App  
+[Folder Link](./Week3/Day1_Streamlit_Basics/Task1_Loan_Calculator_App/) | [Live Demo](https://easy-loan-calculator.streamlit.app/)  
+
+An interactive **Streamlit app** to calculate EMIs, generate amortization schedules, compare loan scenarios, and track repayment milestones.  
+
+**Key Features & Enhancements**  
+- EMI calculation with detailed amortization table  
+- Compare two loan scenarios side by side  
+- Loan insights: principal vs interest, milestones (50% repaid, balance ≤ 25%)  
+- Visuals: pie chart for repayment breakdown  
+- Export results as CSV  
+- Clean, responsive UI with sidebar inputs  
+
+**Screenshots**  
+![Single Loan Mode](./Week3/Day1_Streamlit_Basics/Task1_Loan_Calculator_App/output-images/loan2.png)  
+![Compare Mode](./Week3/Day1_Streamlit_Basics/Task1_Loan_Calculator_App/output-images/loan4.png)  
+
+More screenshots in the [output-images folder](./Week3/Day1_Streamlit_Basics/Task1_Loan_Calculator_App/output-images/).  
+
+---
+
+### Day 1 – Task 2: ChatApp (Groq + OpenAI)  
+[Folder Link](./Week3/Day1_Streamlit_Basics/Task2_ChatApp_Groq_OpenAI/) | [Live Demo](https://oracle-chat-app.streamlit.app/)  
+
+A mystical **chat app** that blends **LLM prophecies** with **Tarot card draws**, styled with a starry dark theme.  
+
+**Key Features & Enhancements**  
+- Chat UI with typing effect (“Oracle whispers”)  
+- Tarot draws: single card or 3-card spread (Past / Present / Future)  
+- Reversals with visual cues & badges  
+- Sidebar: sample questions, mini archive, clear conversation  
+- Oracle weaves card meanings into responses  
+- External `styles.css` for glowing starfield theme  
+
+**Screenshot**  
+![Mystic Oracle Chat](./Week3/Day1_Streamlit_Basics/Task2_ChatApp_Groq_OpenAI/mystic%20oracle%20chat.png)  
+
+---
+
+### Day 2 – Task 1: MultiAgent RAG System  
+[Folder Link](./Week3/Day2_AI_Agent_Basics/Task1_MultiAgent_RAG_System/) | [Live Demo](https://multiagent-rag.streamlit.app/)  
+
+A **multi-agent RAG app** built with Streamlit + LangChain + Gemini AI to answer salary and insurance queries.  
+
+**Key Features & Enhancements**  
+- Salary Q&A: CTC breakdown, deductions, in-hand calculation  
+- Insurance Q&A: premiums, claims, co-pay, coverage  
+- Multi-agent routing (queries sent to right specialist)  
+- Default context or upload your own docs  
+- Download chats as text  
+- Follow-up suggestions for quick queries  
+- Debug mode: view retrieved snippets  
+
+**Screenshot**  
+![MultiAgent RAG App](./Week3/Day2_AI_Agent_Basics/Task1_MultiAgent_RAG_System/multiagent.png)  
