@@ -1,0 +1,44 @@
+# ===== Python =====
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyo
+*.pyd
+# Ignore Streamlit secrets
+.streamlit/secrets.toml
+
+# ===== Virtual Env =====
+.venv/
+env/
+venv/
+ENV/
+.venv.bak/
+
+# ===== Environment / Secrets =====
+.env
+.env.*
+*.env
+
+# ===== Streamlit =====
+.streamlit/
+
+# ===== OS Crap =====
+.DS_Store
+Thumbs.db
+
+# ===== Logs =====
+*.log
+
+# ===== Jupyter / IPython =====
+.ipynb_checkpoints/
+*.ipynb
+
+# ===== Images (optional: ignore if too heavy, else keep) =====
+# images/tarot/*.png
+# images/tarot/*.jpg
+
+# ===== Cache =====
+.cache/
+*.egg-info/
+dist/
+build/

@@ -1,0 +1,166 @@
+/* ====== Global App Background ====== */
+body, .main, .stApp {
+    background: #0b0b0f url("https://www.transparenttextures.com/patterns/stardust.png") repeat !important;
+    background-size: 300px 300px;
+    color: #f5e6ff !important;
+    font-family: 'Trebuchet MS', sans-serif;
+}
+
+/* Gentle twinkle animation */
+@keyframes twinkle { 
+  0%{opacity:.6} 
+  50%{opacity:1} 
+  100%{opacity:.6} 
+}
+.stApp { animation: twinkle 6s ease-in-out infinite; }
+
+/* ====== Headings ====== */
+h1 {
+    font-size: 2.5rem !important;
+    color: #e0b3ff !important;
+    text-shadow: 0px 0px 12px #a64ca6;
+    text-align: center;
+}
+
+/* ====== Inputs ====== */
+.stTextInput input {
+    background-color: #1f1b2e !important;
+    color: #e0d7ff !important;
+    border: 1px solid #a64ca6 !important;
+    border-radius: 10px !important;
+    padding: 10px !important;
+}
+
+/* ====== Chat Bubbles ====== */
+.user-bubble {
+    background: linear-gradient(135deg, #a64ca6, #6a0dad);
+    color: white;
+    padding: 10px 15px;
+    border-radius: 15px;
+    max-width: 70%;
+    margin: 8px 0;
+    float: right;
+    clear: both;
+    box-shadow: 0px 0px 10px rgba(166, 76, 166, 0.7);
+}
+.oracle-bubble {
+    background: #1f1b2e;
+    color: #f5e6ff;
+    padding: 10px 15px;
+    border-radius: 15px;
+    max-width: 70%;
+    margin: 8px 0;
+    float: left;
+    clear: both;
+    border: 1px solid #a64ca6;
+    box-shadow: 0px 0px 15px rgba(166, 76, 166, 0.6);
+}
+
+/* ====== Tarot Cards (main area) ====== */
+.tarot-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid #a64ca6;
+    border-radius: 15px;
+    padding: 12px;
+    margin: 12px 0;
+    text-align: center;
+    box-shadow: 0px 0px 15px rgba(166, 76, 166, 0.5);
+    width: 220px;
+    animation: floatReveal 300ms ease-out;
+    transition: transform .25s ease, box-shadow .25s ease;
+}
+.tarot-card:hover {
+    transform: scale(1.03);
+    box-shadow: 0 0 20px rgba(217,179,255,0.7), 0 0 8px rgba(166,76,166,0.5) inset;
+}
+.tarot-card img {
+    border-radius: 10px;
+    margin-bottom: 8px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+.tarot-card b {
+    display: block;
+    margin-bottom: 5px;
+    color: #f5e6ff;
+    font-size: 1.1rem;
+}
+.tarot-card span {
+    display: block;
+    font-size: 0.85rem;
+    color: #d9b3ff;
+    font-style: italic;
+}
+
+/* Animation */
+@keyframes floatReveal {
+    from { opacity: 0; transform: translateY(6px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ====== Reversed Cards ====== */
+.badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    margin-top: 6px;
+    color: #f5e6ff;
+    border: 1px solid #a64ca6;
+    background: rgba(166, 76, 166, 0.15);
+}
+.tarot-card.reversed {
+    box-shadow: 0 0 18px rgba(255, 106, 150, 0.55);
+    border-color: #ff6a96;
+}
+.tarot-card.reversed img {
+    transform: rotate(180deg);
+    filter: saturate(0.9) contrast(1.05);
+}
+
+/* ====== Sidebar ====== */
+section[data-testid="stSidebar"] {
+    background-color: #140c24 !important;
+    color: #f5e6ff;
+}
+section[data-testid="stSidebar"] button {
+    background: #6a0dad !important;
+    color: #f5e6ff !important;
+    border: 1px solid #a64ca6 !important;
+    border-radius: 10px !important;
+    font-weight: bold !important;
+    margin-bottom: 10px !important;
+}
+section[data-testid="stSidebar"] button:hover {
+    background: #a64ca6 !important;
+    color: white !important;
+}
+
+/* ====== Sidebar Mini-Card Thumbnails ====== */
+.sidebar-mini-card {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid #a64ca6;
+    border-radius: 10px;
+    padding: 8px 10px;
+    margin-bottom: 10px;
+    box-shadow: 0 0 10px rgba(166,76,166,0.35);
+}
+.sidebar-mini-thumb {
+    width: 46px; 
+    height: 70px;
+    object-fit: cover;
+    border-radius: 6px;
+}
+.sidebar-mini-card.reversed .sidebar-mini-thumb {
+    transform: rotate(180deg);
+}
+.sidebar-mini-title {
+    color: #f5e6ff;
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+.sidebar-mini-title .badge { margin-left: 6px; }
