@@ -262,7 +262,7 @@ An interactive **Streamlit app** to calculate EMIs, generate amortization schedu
 ![Single Loan Mode](./Week3/Day1_Streamlit_Basics/Task1_Loan_Calculator_App/output-images/loan2.png)  
 ![Compare Mode](./Week3/Day1_Streamlit_Basics/Task1_Loan_Calculator_App/output-images/loan4.png)  
 
-More screenshots in the [output-images folder](./Week3/Day1_Streamlit_Basics/Task1_Loan_Calculator_App/output-images/).  
+More screenshots in the [output-images folder](./Week3/Day1_Streamlit_Basics/Task1_Loan_Calculator_App/output-images).  
 
 ---
 
